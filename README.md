@@ -1,26 +1,24 @@
-# Thai + English Text to MP3
+# Thai + English Google gTTS — Streamlit
 
-Streamlit app using Google gTTS, with automatic Thai/English segment detection, MP3 playback and download.
+Fixes the Python `audioop` / `pyaudioop` import error by **removing pydub** and using the system `ffmpeg` executable directly to concatenate MP3 clips.
 
-## Run locally
+## Deploy on Streamlit Community Cloud
 
-1. Install Python 3.10+ and FFmpeg (ensure `ffmpeg` and `ffprobe` are on PATH).
-2. In this directory:
+Upload these **three files into the repository root** (alongside README.md):
+
+- `app.py` (replace existing file)
+- `requirements.txt` (replace existing file)
+- `packages.txt` (replace existing file)
+
+Commit changes on branch `main`. The existing Streamlit deployment will normally redeploy automatically. No new Streamlit app is needed.
+
+## Local run
+
+Install Python and FFmpeg (available on PATH), then:
 
 ```bash
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Open the local URL shown by Streamlit (usually http://localhost:8501).
-
-## Streamlit Community Cloud
-
-Push `app.py`, `requirements.txt`, and `packages.txt` to a GitHub repository. Deploy with `app.py` as the entry point. `packages.txt` installs FFmpeg on Streamlit Community Cloud.
-
-## Notes
-
-- Internet connection is required to generate audio; gTTS uses an online Google Translate speech service.
-- gTTS is **not** Microsoft Neural Voice, and may have request limits or temporary outages.
-- Alternating languages may sound discontinuous because each language segment is synthesized separately.
-- The app processes up to 3,000 characters per request.
+Google gTTS requires internet access. This release is syntax-checked but cannot be end-to-end tested without network access to Google TTS and the Streamlit server.
